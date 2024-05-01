@@ -1,9 +1,6 @@
 envs:
   MODEL_NAME: xtuner/llava-llama-3-8b-v1_1
-  MODEL_ARCH: llava
   HF_HUB_ENABLE_HF_TRANSFER: True
-
-  
 
 resources:
   # accelerators: {L4:4, A100:4, A100:8, A100-80GB:2, A100-80GB:4, A100-80GB:8} ## Large models
@@ -34,16 +31,14 @@ service:
 
 setup: |
   pip install hf_transfer
-  docker pull openmmlab/lmdeploy:latest
-  
 
 run: | 
   # Serve With Docker
-  docker run -d --runtime nvidia --gpus all \
+  docker run --runtime nvidia --gpus all \
       -v ~/.cache/huggingface:/root/.cache/huggingface \
       --env "HUGGING_FACE_HUB_TOKEN=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"\
       -p 8080:8080 \
       --ipc=host \
       openmmlab/lmdeploy:latest \
-    lmdeploy serve api_server $MODEL_NAME --model-name $MODEL_ARCH --server-port 8080
+    lmdeploy serve api_server $MODEL_NAME --server-port 8080
 
