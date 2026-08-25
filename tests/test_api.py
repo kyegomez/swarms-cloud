@@ -2,6 +2,11 @@ import os
 import requests
 import json
 import time
+import pytest
+
+@pytest.fixture
+def agent_id():
+    return "test-agent-123"
 
 # Configuration
 BASE_URL = os.environ.get("SWARMS_CLOUD_BASE_URL", "http://localhost:8080")

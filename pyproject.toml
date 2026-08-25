@@ -26,6 +26,7 @@ python = "^3.10"
 httpx = "*"
 loguru = "*"
 pydantic = "*"
+requests = "*"
 
 
 
